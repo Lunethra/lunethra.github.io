@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title data-i18n="title">My Personal Site</title>
+
+  <link rel="shortcut icon" href="lunethra.png" type="image/png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Google fonts: Inter for English, Vazirmatn for Persian -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+  .card {
+    border: 1px solid rgba(0,0,0,0.08); /* یا rgba(0,0,0,0.05) */
+  }
+
+    /* Buttons style */
+    .btn {
+      font-family: var(--btn-font, Inter); /* پیش‌فرض انگلیسی */
+      font-weight: 600;
+      background: var(--btn-bg, transparent);
+      color: var(--btn-text, var(--text));
+      border: 1px solid var(--btn-border, transparent);
+      transition: background .25s, color .25s, border-color .25s;
+    }
+
+    html[lang="fa"] .btn {
+      --btn-font: Vazirmatn, Inter, system-ui, -apple-system;
+    }
+
+    /* Placeholders style */
+    input::placeholder,
+    textarea::placeholder {
+    font-family: Inter, system-ui, -apple-system;
+    color: var(--muted);
+    }
+
+    /* وقتی زبان فارسی شد */
+    html[lang="fa"] input::placeholder,
+    html[lang="fa"] textarea::placeholder {
+    font-family: Vazirmatn, Inter, system-ui, -apple-system;
+    }
+
+    .socials i {
+      font-size: 30px;      /* بزرگ‌تر کردن */
+      color: var(--icon); /* رنگ هماهنگ با وبسایت */
+      transition: color .25s ease, transform .2s ease;
+    }
+
+    .socials a:hover i {
+      color: var(--text);   /* تغییر رنگ هنگام هاور */
+      transform: scale(1.1); /* کمی بزرگ شدن */
+    }
+
+    .socials .icon {
+        color: var(--text); /* هم رنگ با متن اصلی */
+        transition: color .25s ease;
+    }
+
+    .socials a:hover .icon {
+        color: var(--accent); /* وقتی هاور شد رنگ متفاوت */
+    }
+
+    :root{
+      --bg:#ffffff;
+      --card:#f6f6f8;
+      --text:#111827;
+      --muted:#6b7280;
+      --accent:#6c5ce7;
+      --icon:#3c3666;
+      --glass: rgba(255,255,255,0.6);
+    }
+    :root.dark{
+      --bg:#0b1020;
+      --card:#0f1724;
+      --text:#e6eef8;
+      --muted:#9aa4b2;
+      --accent:#8b5cf6;
+      --icon:#3c3666;
+      --glass: rgba(255,255,255,0.03);
+    }
+
+    /* Basic reset */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100%;
+      background:linear-gradient(180deg,var(--bg),var(--card));
+      color:var(--text);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      transition:background .25s ease, color .25s ease;
+      padding:24px;
+    }
+
+    /* Persian font and RTL when html has lang=fa */
+    html[lang="fa"] body{
+      font-family: Vazirmatn, Inter, system-ui, -apple-system;
+    }
+
+    .container{
+      max-width:1000px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:28px;
+      align-items:start;
+    }
+
+    header{
+      grid-column:1 / -1;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:8px;
+    }
+
+    .brand{
+      display:flex;gap:12px;align-items:center
+    }
+    .logo{
+      width:54px;height:54px;border-radius:12px;background:var(--accent);display:grid;place-items:center;color:white;font-weight:700;box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    nav{display:flex;gap:10px}
+    .btn{
+      background:transparent;border:1px solid transparent;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600
+    }
+    .btn.ghost{border-color:transparent}
+    .controls{display:flex;gap:10px}
+
+    main{
+      background:var(--card);
+      padding:20px;border-radius:14px;box-shadow:0 6px 30px rgba(2,6,23,0.08);
+    }
+
+    .card{
+      background:var(--card);padding:16px;border-radius:12px;margin-bottom:12px;backdrop-filter:blur(6px);
+    }
+
+    .profile{
+      display:flex;flex-direction:column;gap:12px;align-items:center;padding:18px;border-radius:12px;background:linear-gradient(180deg,var(--glass),transparent);
+    }
+    .avatar{width:140px;height:140px;border-radius:18px;background:linear-gradient(135deg,rgba(255,255,255,0.06),rgba(0,0,0,0.06));display:grid;place-items:center;font-size:36px;font-weight:700}
+
+    form{display:grid;gap:10px}
+    input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent;color:var(--text)}
+
+    footer{grid-column:1 / -1;margin-top:10px;color:var(--muted);font-size:14px}
+
+    /* Responsiveness */
+    @media (max-width:920px){
+      .container{grid-template-columns:1fr;}
+    }
+
+    /* RTL tweaks */
+    html[lang="fa"] .container{direction:rtl}
+    html[lang="fa"] header{flex-direction:row-reverse}
+    html[lang="fa"] .brand{gap:12px}
+    html[lang="fa"] nav{justify-content:flex-end}
+
+    /* small helpers */
+    .muted{color:var(--muted);font-size:13px}
+    .h1{font-size:22px;font-weight:700;margin:0}
+    .lead{font-size:15px;color:var(--muted);margin-top:6px}
+
+
+    /* Blog-style cards for projects */
+    #projects-container .card {
+      position: relative;
+      background: var(--card);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08),
+                  0 0 0 1px rgba(255, 255, 255, 0.04);
+      transform: translateY(0);
+      transition: all 0.25s ease;
+    }
+
+    #projects-container .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12),
+                  0 0 0 1px var(--accent);
+    }
+
+    html.dark #projects-container .card {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4),
+                  0 0 0 1px rgba(255, 255, 255, 0.05);
+    }
+
+    html.dark #projects-container .card:hover {
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6),
+                  0 0 0 1px var(--accent);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo"><img src="lunethra.png" style="object-fit: contain;width: 100%;height: 100%;border-radius: 10px;"></div>
+        <div>
+          <div class="h1" data-i18n="title">My Personal Site</div>
+          <div class="muted" data-i18n="subtitle">A simple bilingual personal page</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="themeToggle" aria-pressed="false" data-i18n="toggleTheme">Dark</button>
+        <button class="btn" id="langToggle" aria-pressed="false" data-i18n="toggleLang">فارسی</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2 class="h1" data-i18n="welcome">Welcome</h2>
+        <p class="lead" data-i18n="paragraph">This is a simple personal website that supports switching between English and Persian, and Light/Dark modes. The site remembers your choices.</p>
+      </section>
+
+      <section class="card">
+        <h3 class="h1" data-i18n="about">About</h3>
+        <p data-i18n="aboutText">I'm a developer/designer who likes clean interfaces. Use the buttons on the top-right to switch language and theme.</p>
+      </section>
+
+      <section class="card">
+        <h3 class="h1" data-i18n="myprojects">My Projects</h3>
+      <div id="projects-container" style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+      "></div>
+      </section>
+
+      <!-- <section class="card">
+        <h3 class="h1" data-i18n="contact">Contact</h3><br>
+        <form>
+          <input type="text" placeholder="Name" data-i18n-placeholder="name" />
+          <input type="email" placeholder="Email" data-i18n-placeholder="email" />
+          <input rows="4" placeholder="Message" data-i18n-placeholder="message"></input>
+          <button class="btn" type="button" data-i18n="send">Send</button>
+        </form>
+
+      </section> -->
+
+    </main>
+
+    <aside>
+      <div class="profile card">
+        <div class="avatar"><img src="lunethra.png" style="width: 100%;height: 100%; object-fit: contain; border-radius: 10px;"></div>
+        <div>
+          <div class="h1" data-i18n="name" style="text-align: center;">Lunethra</div>
+          <div class="muted" data-i18n="role">Developer • Designer</div>
+        </div>
+        <div class="socials" style="margin-top:10px; display:flex; gap:10px; justify-content:center;">
+          <a href="https://github.com/Lunethra" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://pypi.com/Lunethra" target="_blank" aria-label="Pypi">
+            <i class="fab fa-python"></i>
+          </a>
+        </div>
+      </div>
+
+      <section class="card">
+        <h3 class="h1" data-i18n="skills">Skills</h3>
+        <div style="display: flex;align-items: center; gap: 5px;font-size: 20px;">
+        <i class="fab fa-python"></i>
+        <p data-i18n="pythonskill" style="font-size: 17px;">Python Master | 4y of experience</p>
+        </div>
+        <div style="display: flex;align-items: center; gap: 5px;font-size: 20px;">
+          <i class="fab fa-html5"></i>
+          <p data-i18n="frontweb" style="font-size: 17px;">Front-End Intermediate (HTML,CSS)</p>
+        </div>
+        <div style="display: flex;align-items: center; gap: 5px;font-size: 20px;">
+          <i class="fab fa-js"></i>
+          <p data-i18n="backweb" style="font-size: 17px;">Back-End Newbie (Javascript)</p>
+        </div>
+        <div style="display: flex;align-items: center; gap: 5px;font-size: 20px;">
+          <i class="fa-solid fa-desktop"></i>
+          <p data-i18n="desktop" style="font-size: 17px;">Desktop Programming Intermediate</p>
+        </div>
+      </section>
+
+      <div class="card muted" style="text-align:center;margin-top:12px;">
+        <div data-i18n="note">Recently working on Set game web app.</div>
+      </div>
+    </aside>
+
+    <footer>
+      <div>&copy; <span id="year"></span> <span data-i18n="title">My Personal Site</span></div>
+    </footer>
+  </div>
+
+  <script>
+    // --- Translations ---
+    const translations = {
+      en: {
+        title: "Lunethra Website",
+        subtitle: "Portofolio website for Lunethra",
+        toggleTheme: "Toggle Theme",
+        toggleLang: "فارسی",
+        welcome: "Welcome",
+        paragraph: "This website is created by Lunethra, You can see my statistics and projects here.",
+        about: "About",
+        aboutText: "I'm a developer/designer who likes clean interfaces.  I like web programming very much.  To show you the power of the web, test the ' l ' and ' t ' buttons on your keyboard to switch language and theme.",
+        skills: "Skills",
+        myprojects: "My Projects",
+        contact: "Contact",
+        name: "Lunethra",
+        role: "Developer • Designer",
+        note: "Recently working on Set game web app.",
+        send: "Send",
+        name_field: "Name",
+        email_field: "Email",
+        message_field: "Message",
+        pythonskill: "Python Master | 4y of experience",
+        frontweb: "Front-End Intermediate (HTML,CSS)",
+        backweb: "Back-End Newbie (Javascript)",
+        desktop: "Desktop Programming Intermediate"
+      },
+      fa: {
+        title: "وبسایت لونِترا",
+        subtitle: "وبسایت معرفی و رزومه",
+        toggleTheme: "تغییر تم",
+        toggleLang: "English",
+        welcome: "به سایتِ من خوش آمدید.",
+        paragraph: "این وبسایت توسط لونِترا ساخته شده است، می‌توانید در این وبسایت آمار و پروژه‌های من را ببینید.",
+        about: "درباره",
+        aboutText: "من توسعه‌دهنده/طراحی هستم که رابط‌های تمیز را دوست دارم. من به شدت به برنامه‌نویسی وب علاقه‌مندم، برای اینکه شماهم از قدرت وبسایت‌ها پی ببرید، می‌توانید در وبسایت من از دکمه ی l یا t استفاده کنید تا زبان و تم وبسایت تغییر کند.",
+        skills: "مهارت‌ها",
+        myprojects:"پروژه‌های من",
+        contact: "تماس",
+        name: "لونِترا",
+        role: "توسعه‌دهنده • طراح",
+        note: "اخیرا در حال کار بر روی بازی سِت.",
+        send: "ارسال",
+        name_field: "نام",
+        email_field: "ایمیل",
+        message_field: "پیام",
+        pythonskill: "پایتون ارشد | ۴ سال تجربه",
+        frontweb: "فرانت کار متوسط (HTML,CSS)",
+        backweb: "بک کار تازه کار (Javascript)",
+        desktop: "برنامه‌نویس دسکتاپ سطح متوسط"
+      }
+    };
+
+    // Find elements with data-i18n and data-i18n-placeholder
+    function applyTranslations(lang){
+      document.documentElement.lang = lang === 'fa' ? 'fa' : 'en';
+      document.documentElement.setAttribute('lang', lang === 'fa' ? 'fa' : 'en');
+
+      // direction
+      if(lang === 'fa') document.documentElement.dir = 'rtl';
+      else document.documentElement.dir = 'ltr';
+
+      // text content
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        if(translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
+      });
+
+      // placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+        const key = el.getAttribute('data-i18n-placeholder');
+        const mapKey = key === 'name' ? (lang==='fa'? 'name_field':'name_field') : (key==='email'? 'email_field':'message_field');
+        // fallback to translations map
+        if(key === 'name') el.placeholder = translations[lang].name_field;
+        else if(key === 'email') el.placeholder = translations[lang].email_field;
+        else if(key === 'message') el.placeholder = translations[lang].message_field;
+      });
+
+      // update title element too
+      const titleEl = document.querySelector('title');
+      if(titleEl) titleEl.textContent = translations[lang].title;
+
+    }
+
+    // Theme toggling
+    const root = document.documentElement;
+    function applyTheme(theme){
+      if(theme === 'dark') root.classList.add('dark');
+      else root.classList.remove('dark');
+
+      // update button label
+      const btn = document.getElementById('themeToggle');
+      btn.textContent = translations[currentLang].toggleTheme + (theme==='dark' ? ' (Dark)' : ' (Light)');
+      btn.setAttribute('aria-pressed', theme==='dark');
+    }
+
+    // Read saved preferences
+    let currentLang = localStorage.getItem('ps_lang') || (navigator.language && navigator.language.startsWith('fa') ? 'fa' : 'en');
+    let currentTheme = localStorage.getItem('ps_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+    // Initialize
+    applyTranslations(currentLang);
+    applyTheme(currentTheme);
+
+    // wire up buttons
+    document.getElementById('langToggle').addEventListener('click', ()=>{
+      currentLang = currentLang === 'en' ? 'fa' : 'en';
+      localStorage.setItem('ps_lang', currentLang);
+      applyTranslations(currentLang);
+      // adjust text direction and some style nuances
+      document.documentElement.dir = currentLang === 'fa' ? 'rtl' : 'ltr';
+
+      // set lang button label to the other language name (common pattern)
+      document.getElementById('langToggle').textContent = translations[currentLang].toggleLang;
+    });
+
+    document.getElementById('themeToggle').addEventListener('click', ()=>{
+      currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+      localStorage.setItem('ps_theme', currentTheme);
+      applyTheme(currentTheme);
+    });
+
+    // Set initial state of lang button label
+    document.getElementById('langToggle').textContent = translations[currentLang].toggleLang;
+
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Small accessibility: allow keyboard toggle with L (language) and T (theme)
+    document.addEventListener('keydown', (e)=>{
+      if(e.key.toLowerCase() === 'l') document.getElementById('langToggle').click();
+      if(e.key.toLowerCase() === 't') document.getElementById('themeToggle').click();
+    });
+
+
+
+    // My projects section
+    // --- Fetch GitHub Repos ---
+    async function loadProjects() {
+      const container = document.getElementById("projects-container");
+      container.innerHTML = "<div class='muted'>Loading repositories...</div>";
+
+      try {
+        const response = await fetch("https://api.github.com/users/Lunethra/repos");
+        const repos = await response.json();
+
+        // فیلتر کردن ریپوهایی که نمی‌خوایم
+        const filtered = repos.filter(repo =>
+          repo.name.toLowerCase() !== "set" &&
+          repo.name.toLowerCase() !== "lunethra.github.io"
+        );
+
+        // مرتب‌سازی بر اساس آخرین آپدیت
+        filtered.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+
+        // حذف پیام "Loading..."
+        container.innerHTML = "";
+
+        if (filtered.length === 0) {
+          container.innerHTML = "<div class='muted'>No repositories found.</div>";
+          return;
+        }
+
+        // ساخت کارت‌ها برای هر ریپو
+        filtered.forEach(repo => {
+          const card = document.createElement("a");
+          card.href = repo.html_url;
+          card.target = "_blank";
+          card.rel = "noopener noreferrer";
+          card.className = "card";
+          card.style.textDecoration = "none";
+          card.style.color = "inherit";
+          card.innerHTML = `
+            <div class="h1" style="font-size:17px;margin-bottom:6px;">${repo.name}</div>
+            <div class="muted" style="font-size:14px;">${repo.description || "No description"}</div>
+            <div class="muted" style="font-size:12px;margin-top:6px;">
+              ⭐ ${repo.stargazers_count} • Updated: ${new Date(repo.updated_at).toLocaleDateString()}
+            </div>
+          `;
+          container.appendChild(card);
+        });
+
+      } catch (err) {
+        container.innerHTML = "<div class='muted'>Failed to load repositories 😢</div>";
+        console.error(err);
+      }
+    }
+
+    // وقتی صفحه آماده شد
+    document.addEventListener("DOMContentLoaded", loadProjects);
+  </script>
+</body>
+</html>
